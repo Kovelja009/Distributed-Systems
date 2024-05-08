@@ -130,7 +130,7 @@ public class AppConfig {
 				String neighborListProp = properties.getProperty("servent"+i+".neighbors");
 				
 				if (neighborListProp == null) {
-					timestampedErrorPrint("Warning: graph is not clique, and node " + i + " doesnt have neighbors");
+					timestampedErrorPrint("Warning: graph is not clique, and node " + i + " doesn't have neighbors");
 				} else {
 					String[] neighborListArr = neighborListProp.split(",");
 					

@@ -102,13 +102,13 @@ public class SimpleServentListener implements Runnable, Cancellable {
 				 * because that way is much simpler and less error prone.
 				 */
 				switch (clientMessage.getMessageType()) {
-				case TRANSACTION:
+				case TRANSACTION: // standard message
 					messageHandler = new TransactionHandler(clientMessage, snapshotCollector.getBitcakeManager());
 					break;
-				case LY_MARKER:
+				case LY_MARKER: // marker message
 					messageHandler = new LYMarkerHandler();
 					break;
-				case LY_TELL:
+				case LY_TELL: // sending snapshot
 					messageHandler = new LYTellHandler(clientMessage, snapshotCollector);
 				}
 				

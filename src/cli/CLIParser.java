@@ -7,12 +7,7 @@ import java.util.Scanner;
 import app.AppConfig;
 import app.Cancellable;
 import app.snapshot_bitcake.SnapshotCollector;
-import cli.command.BitcakeInfoCommand;
-import cli.command.CLICommand;
-import cli.command.InfoCommand;
-import cli.command.PauseCommand;
-import cli.command.StopCommand;
-import cli.command.TransactionBurstCommand;
+import cli.command.*;
 import servent.SimpleServentListener;
 
 /**
@@ -48,6 +43,7 @@ public class CLIParser implements Runnable, Cancellable {
 		commandList.add(new TransactionBurstCommand(snapshotCollector.getBitcakeManager()));
 		commandList.add(new BitcakeInfoCommand(snapshotCollector));
 		commandList.add(new StopCommand(this, listener, snapshotCollector));
+		commandList.add(new SendCommand(snapshotCollector.getBitcakeManager()));
 	}
 	
 	@Override

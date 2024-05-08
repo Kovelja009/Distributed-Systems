@@ -11,8 +11,8 @@ import servent.message.util.MessageUtil;
 
 public class TransactionBurstCommand implements CLICommand {
 
-	private static final int TRANSACTION_COUNT = 5;
-	private static final int BURST_WORKERS = 10;
+	private static final int TRANSACTION_COUNT = 1;
+	private static final int BURST_WORKERS = 1;
 	private static final int MAX_TRANSFER_AMOUNT = 10;
 	
 	//Chandy-Lamport

@@ -29,7 +29,7 @@ public class DelayedMessageSender implements Runnable {
 		 * It is important to take regular naps for health reasons.
 		 */
 		try {
-			Thread.sleep((long)(Math.random() * 1000) + 500);
+			Thread.sleep((long)(Math.random() * 400) + 500);
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
