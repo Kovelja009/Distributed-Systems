@@ -2,7 +2,9 @@ package servent.message;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import app.AppConfig;
@@ -24,12 +26,14 @@ public class BasicMessage implements Message {
 	private final List<ServentInfo> routeList;
 	private final String messageText;
 	private final boolean white;
+
+	private final Map<Integer, Integer> snapshotVersions;
 	
 	//This gives us a unique id - incremented in every natural constructor.
 	private static AtomicInteger messageCounter = new AtomicInteger(0);
 	private final int messageId;
 	
-	public BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo) {
+	public BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo,  Map<Integer, Integer> snapshotVersions) {
 		this.type = type;
 		this.originalSenderInfo = originalSenderInfo;
 		this.receiverInfo = receiverInfo;
@@ -38,10 +42,11 @@ public class BasicMessage implements Message {
 		this.messageText = "";
 		
 		this.messageId = messageCounter.getAndIncrement();
+		this.snapshotVersions = snapshotVersions;
 	}
 	
 	public BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo,
-			String messageText) {
+			String messageText, Map<Integer, Integer> snapshotVersions) {
 		this.type = type;
 		this.originalSenderInfo = originalSenderInfo;
 		this.receiverInfo = receiverInfo;
@@ -50,6 +55,7 @@ public class BasicMessage implements Message {
 		this.messageText = messageText;
 		
 		this.messageId = messageCounter.getAndIncrement();
+		this.snapshotVersions = snapshotVersions;
 	}
 	
 	@Override
@@ -71,7 +77,12 @@ public class BasicMessage implements Message {
 	public boolean isWhite() {
 		return white;
 	}
-	
+
+	@Override
+	public Map<Integer, Integer> getSnapshotVersions() {
+		return snapshotVersions;
+	}
+
 	@Override
 	public List<ServentInfo> getRoute() {
 		return routeList;
@@ -88,7 +99,7 @@ public class BasicMessage implements Message {
 	}
 	
 	protected BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo,
-			boolean white, List<ServentInfo> routeList, String messageText, int messageId) {
+			boolean white, List<ServentInfo> routeList, String messageText, int messageId, Map<Integer, Integer> snapshotVersions) {
 		this.type = type;
 		this.originalSenderInfo = originalSenderInfo;
 		this.receiverInfo = receiverInfo;
@@ -97,6 +108,7 @@ public class BasicMessage implements Message {
 		this.messageText = messageText;
 		
 		this.messageId = messageId;
+		this.snapshotVersions = snapshotVersions;
 	}
 	
 	/**
@@ -111,7 +123,7 @@ public class BasicMessage implements Message {
 		List<ServentInfo> newRouteList = new ArrayList<>(routeList);
 		newRouteList.add(newRouteItem);
 		Message toReturn = new BasicMessage(getMessageType(), getOriginalSenderInfo(),
-				getReceiverInfo(), isWhite(), newRouteList, getMessageText(), getMessageId());
+				getReceiverInfo(), isWhite(), newRouteList, getMessageText(), getMessageId(), getSnapshotVersions());
 		
 		return toReturn;
 	}
@@ -126,7 +138,7 @@ public class BasicMessage implements Message {
 			ServentInfo newReceiverInfo = AppConfig.getInfoById(newReceiverId);
 			
 			Message toReturn = new BasicMessage(getMessageType(), getOriginalSenderInfo(),
-					newReceiverInfo, isWhite(), getRoute(), getMessageText(), getMessageId());
+					newReceiverInfo, isWhite(), getRoute(), getMessageText(), getMessageId(), getSnapshotVersions());
 			
 			return toReturn;
 		} else {
@@ -140,7 +152,7 @@ public class BasicMessage implements Message {
 	@Override
 	public Message setRedColor() {
 		Message toReturn = new BasicMessage(getMessageType(), getOriginalSenderInfo(),
-				getReceiverInfo(), false, getRoute(), getMessageText(), getMessageId());
+				getReceiverInfo(), false, getRoute(), getMessageText(), getMessageId(), getSnapshotVersions());
 		
 		return toReturn;
 	}
@@ -148,11 +160,19 @@ public class BasicMessage implements Message {
 	@Override
 	public Message setWhiteColor() {
 		Message toReturn = new BasicMessage(getMessageType(), getOriginalSenderInfo(),
-				getReceiverInfo(), true, getRoute(), getMessageText(), getMessageId());
+				getReceiverInfo(), true, getRoute(), getMessageText(), getMessageId(), getSnapshotVersions());
 		
 		return toReturn;
 	}
-	
+
+	@Override
+	public Message setSnapshotVersions(Map<Integer, Integer> snapshotVersions) {
+		Message toReturn = new BasicMessage(getMessageType(), getOriginalSenderInfo(),
+				getReceiverInfo(), false, getRoute(), getMessageText(), getMessageId(), new ConcurrentHashMap<>(snapshotVersions));
+
+		return toReturn;
+	}
+
 	/**
 	 * Comparing messages is based on their unique id and the original sender id.
 	 */
@@ -186,8 +206,10 @@ public class BasicMessage implements Message {
 	public String toString() {
 		return "[" + getOriginalSenderInfo().getId() + "|" + getMessageId() + "|" +
 					getMessageText() + "|" + getMessageType() + "|" +
-					getReceiverInfo().getId() + "]";
+					getReceiverInfo().getId() + "]" + "        snapshots: " + snapshotVersions;
 	}
+
+
 
 	/**
 	 * Empty implementation, which will be suitable for most messages.

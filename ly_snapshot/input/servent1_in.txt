@@ -1,2 +1,4 @@
+transaction_burst
 pause 7000
+pause 10000
 stop

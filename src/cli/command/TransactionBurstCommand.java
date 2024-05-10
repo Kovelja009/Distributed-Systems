@@ -12,7 +12,7 @@ import servent.message.util.MessageUtil;
 public class TransactionBurstCommand implements CLICommand {
 
 	private static final int TRANSACTION_COUNT = 1;
-	private static final int BURST_WORKERS = 1;
+	private static final int BURST_WORKERS = 4;
 	private static final int MAX_TRANSFER_AMOUNT = 10;
 	
 	//Chandy-Lamport
@@ -42,9 +42,11 @@ public class TransactionBurstCommand implements CLICommand {
 					 * The sending might be delayed, so we want to make sure we do the
 					 * reducing at the right time, not earlier.
 					 */
+
+
 					Message transactionMessage = new TransactionMessage(
-							AppConfig.myServentInfo, neighborInfo, amount, bitcakeManager);
-					
+							AppConfig.myServentInfo, neighborInfo, amount, bitcakeManager, AppConfig.snapshotVersions);
+
 					MessageUtil.sendMessage(transactionMessage);
 				}
 				

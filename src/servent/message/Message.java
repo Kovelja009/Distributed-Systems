@@ -2,6 +2,7 @@ package servent.message;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import app.ServentInfo;
 
@@ -64,6 +65,8 @@ public interface Message extends Serializable {
 	 * The body of the message. Use this to see what your neighbors have sent you.
 	 */
 	String getMessageText();
+
+	Map<Integer, Integer> getSnapshotVersions();
 	
 	/**
 	 * An id that is unique per servent. Combined with servent id, it will be unique
@@ -94,6 +97,8 @@ public interface Message extends Serializable {
 	 * the color being changed to white.
 	 */
 	Message setWhiteColor();
+
+	Message setSnapshotVersions(Map<Integer, Integer> snapshotVersions);
 	
 	/**
 	 * This method is invoked by the frameworks sender code. It is invoked

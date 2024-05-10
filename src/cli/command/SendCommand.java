@@ -41,7 +41,7 @@ public class SendCommand implements CLICommand{
 
         ServentInfo neighborInfo = AppConfig.getInfoById(receipient);
 
-        Message transactionMessage = new TransactionMessage(AppConfig.myServentInfo, neighborInfo, amount, bitcakeManager);
+        Message transactionMessage = new TransactionMessage(AppConfig.myServentInfo, neighborInfo, amount, bitcakeManager, AppConfig.snapshotVersions);
         MessageUtil.sendMessage(transactionMessage);
     }
 }

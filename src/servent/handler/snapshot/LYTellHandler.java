@@ -1,6 +1,7 @@
 package servent.handler.snapshot;
 
 import app.AppConfig;
+import app.snapshot_bitcake.LYSnapshotResult;
 import app.snapshot_bitcake.SnapshotCollector;
 import servent.handler.MessageHandler;
 import servent.message.Message;
@@ -21,7 +22,7 @@ public class LYTellHandler implements MessageHandler {
 	public void run() {
 		if (clientMessage.getMessageType() == MessageType.LY_TELL) {
 			LYTellMessage lyTellMessage = (LYTellMessage)clientMessage;
-			
+
 			snapshotCollector.addLYSnapshotInfo(
 					lyTellMessage.getOriginalSenderInfo().getId(),
 					lyTellMessage.getLYSnapshotResult());

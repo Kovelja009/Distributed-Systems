@@ -4,6 +4,8 @@ import app.ServentInfo;
 import app.snapshot_bitcake.BitcakeManager;
 import app.snapshot_bitcake.LaiYangBitcakeManager;
 
+import java.util.Map;
+
 /**
  * Represents a bitcake transaction. We are sending some bitcakes to another node.
  * 
@@ -15,9 +17,9 @@ public class TransactionMessage extends BasicMessage {
 	private static final long serialVersionUID = -333251402058492901L;
 
 	private transient BitcakeManager bitcakeManager;
-	
-	public TransactionMessage(ServentInfo sender, ServentInfo receiver, int amount, BitcakeManager bitcakeManager) {
-		super(MessageType.TRANSACTION, sender, receiver, String.valueOf(amount));
+
+	public TransactionMessage(ServentInfo sender, ServentInfo receiver, int amount, BitcakeManager bitcakeManager, Map<Integer, Integer> snapshotVersions) {
+		super(MessageType.TRANSACTION, sender, receiver, String.valueOf(amount), snapshotVersions);
 		this.bitcakeManager = bitcakeManager;
 	}
 	
@@ -31,10 +33,13 @@ public class TransactionMessage extends BasicMessage {
 		int amount = Integer.parseInt(getMessageText());
 		
 		bitcakeManager.takeSomeBitcakes(amount);
-		if (bitcakeManager instanceof LaiYangBitcakeManager && isWhite()) {
+		if (bitcakeManager instanceof LaiYangBitcakeManager) {
 			LaiYangBitcakeManager lyFinancialManager = (LaiYangBitcakeManager)bitcakeManager;
-			
-			lyFinancialManager.recordGiveTransaction(getReceiverInfo().getId(), amount);
+
+//			lyFinancialManager.recordGiveTransaction(getReceiverInfo().getId(), amount);
+
+			// this should remain hopefully
+			lyFinancialManager.recordGiveTransactionLi(getReceiverInfo().getId(), amount);
 		}
 	}
 }

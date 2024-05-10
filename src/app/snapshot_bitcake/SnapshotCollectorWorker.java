@@ -60,16 +60,22 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
 			 * 3. Print result
 			 */
 			
-			//1 send asks
-			((LaiYangBitcakeManager)bitcakeManager).markerEvent(AppConfig.myServentInfo.getId(), this);
-			
-			//2 wait for responses or finish
+			// 1 send asks
+			synchronized (AppConfig.colorLock) {
+
+				// update our (initiator) snapshot version
+				AppConfig.snapshotVersions.compute(AppConfig.myServentInfo.getId(), (k, v) -> v + 1);
+				// send markers to neighbors
+				((LaiYangBitcakeManager)bitcakeManager).markerEvent(AppConfig.myServentInfo.getId(), this);
+			}
+
+			// 2 wait for responses or finish
 			boolean waiting = true;
 			while (waiting) {
 				if (collectedLYValues.size() == AppConfig.getServentCount()) {
 					waiting = false;
 				}
-				
+
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -81,7 +87,7 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
 				}
 			}
 			
-			//print
+			// print
 			int sum;
 			sum = 0;
 			for (Entry<Integer, LYSnapshotResult> nodeResult : collectedLYValues.entrySet()) {
@@ -89,28 +95,50 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
 				AppConfig.timestampedStandardPrint(
 						"Recorded bitcake amount for " + nodeResult.getKey() + " = " + nodeResult.getValue().getRecordedAmount());
 			}
+
 			for(int i = 0; i < AppConfig.getServentCount(); i++) {
 				for (int j = 0; j < AppConfig.getServentCount(); j++) {
 					if (i != j) {
 						if (AppConfig.getInfoById(i).getNeighbors().contains(j) &&
 							AppConfig.getInfoById(j).getNeighbors().contains(i)) {
+
+							// transit = transit + give - get
+
+							// give
 							int ijAmount = collectedLYValues.get(i).getGiveHistory().get(j);
+
+							// get
 							int jiAmount = collectedLYValues.get(j).getGetHistory().get(i);
-							
-							if (ijAmount != jiAmount) {
+
+//							if(ijAmount != 0 || jiAmount != 0){
+//								AppConfig.timestampedStandardPrint("---------------");
+//								AppConfig.timestampedStandardPrint("Servent " + i + " gave " + ijAmount + " bitcakes to " + j);
+//								AppConfig.timestampedStandardPrint("Servent " + j + " got  " + jiAmount + " bitcakes from " + i);
+//
+//							}
+
+							String transitKey= i + "-" + j;
+							int transitAmount = 0;
+
+							transitAmount = AppConfig.transit.get(transitKey) + ijAmount - jiAmount;
+							AppConfig.transit.put(transitKey, transitAmount);
+
+							if (transitAmount != 0) {
 								String outputString = String.format(
 										"Unreceived bitcake amount: %d from servent %d to servent %d",
-										ijAmount - jiAmount, i, j);
+										transitAmount, i, j);
 								AppConfig.timestampedStandardPrint(outputString);
-								sum += ijAmount - jiAmount;
+								sum += transitAmount;
 							}
 						}
 					}
 				}
 			}
-			
+
 			AppConfig.timestampedStandardPrint("System bitcake count: " + sum);
-			
+
+			AppConfig.timestampedStandardPrint("==================================================================================");
+
 			collectedLYValues.clear(); //reset for next invocation
 			collecting.set(false);
 		}
@@ -119,9 +147,19 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
 	
 	@Override
 	public void addLYSnapshotInfo(int id, LYSnapshotResult lySnapshotResult) {
-		collectedLYValues.put(id, lySnapshotResult);
+		try {
+			collectedLYValues.put(id, lySnapshotResult);
+		} catch (Exception e) {
+			AppConfig.timestampedErrorPrint("Couldn't add addLYSnapshotInfo info for " + id);
+			e.printStackTrace();
+		}
 	}
-	
+
+	@Override
+	public Map<Integer, LYSnapshotResult> getCollectedLYValues() {
+		return collectedLYValues;
+	}
+
 	@Override
 	public void startCollecting() {
 		boolean oldValue = this.collecting.getAndSet(true);

@@ -1,5 +1,7 @@
 package app.snapshot_bitcake;
 
+import java.util.Map;
+
 /**
  * This class is used if the user hasn't specified a snapshot type in config.
  * 
@@ -25,4 +27,8 @@ public class NullSnapshotCollector implements SnapshotCollector {
 	@Override
 	public void startCollecting() {}
 
+	@Override
+	public Map<Integer, LYSnapshotResult> getCollectedLYValues() {
+		return Map.of();
+	}
 }

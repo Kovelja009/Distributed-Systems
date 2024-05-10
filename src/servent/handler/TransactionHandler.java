@@ -29,12 +29,15 @@ public class TransactionHandler implements MessageHandler {
 				return;
 			}
 			
-			bitcakeManager.addSomeBitcakes(amountNumber);
 			synchronized (AppConfig.colorLock) {
-				if (bitcakeManager instanceof LaiYangBitcakeManager && clientMessage.isWhite()) {
+				bitcakeManager.addSomeBitcakes(amountNumber);
+				if (bitcakeManager instanceof LaiYangBitcakeManager) {
 					LaiYangBitcakeManager lyBitcakeManager = (LaiYangBitcakeManager)bitcakeManager;
 					
-					lyBitcakeManager.recordGetTransaction(clientMessage.getOriginalSenderInfo().getId(), amountNumber);
+//					lyBitcakeManager.recordGetTransaction(clientMessage.getOriginalSenderInfo().getId(), amountNumber);
+
+					// this should remain hopefully
+					lyBitcakeManager.recordGetTransactionLi(clientMessage.getOriginalSenderInfo().getId(), amountNumber);
 				}
 			}
 		} else {

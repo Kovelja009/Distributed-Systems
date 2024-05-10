@@ -5,10 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -33,7 +31,24 @@ public class AppConfig {
 	
 	public static AtomicBoolean isWhite = new AtomicBoolean(true);
 	public static Object colorLock = new Object();
-	
+
+
+	public static List<Integer> initiators;
+
+	/**
+	 * Initiators will use it to calculate the snapshot (for the Li variant)
+	 * "1-2" -> 0 (channel between 1 and 2 has initial value 0)
+	 */
+	public static Map<String, Integer> transit = new ConcurrentHashMap<>();
+
+
+	/**
+	 * standard nodes will use it to store the most recent snapshot version
+	 * for each of the initiators (for the Li variant)
+	 * 1 -> -1 (servent 1 has initial value 0)
+	 */
+	public static Map<Integer, Integer> snapshotVersions = new ConcurrentHashMap<>();
+
 	/**
 	 * Print a message to stdout with a timestamp
 	 * @param message message to print
@@ -104,6 +119,23 @@ public class AppConfig {
 		if (snapshotType == null) {
 			snapshotType = "none";
 		}
+
+		String initiatorsStr = properties.getProperty("initiators");
+		if(initiatorsStr == null){
+			timestampedErrorPrint("No initiators specified. Exiting...");
+			System.exit(0);
+		}
+
+
+		// parse initiators
+		String[] initiatorsArr = initiatorsStr.split(",");
+		List<Integer> initiatorsLst = new ArrayList<>();
+		for(String initiator : initiatorsArr){
+			initiatorsLst.add(Integer.parseInt(initiator));
+			snapshotVersions.put(Integer.parseInt(initiator), -1);
+		}
+
+		initiators = initiatorsLst;
 		
 		for (int i = 0; i < serventCount; i++) {
 			String portProperty = "servent"+i+".port";
@@ -144,9 +176,36 @@ public class AppConfig {
 				}
 			}
 			
-			ServentInfo newInfo = new ServentInfo("localhost", i, serventPort, neighborList);
+			ServentInfo newInfo = new ServentInfo("localhost", i, serventPort, neighborList, initiators.contains(i));
 			serventInfoList.add(newInfo);
 		}
+
+		// for transit hashmap
+		for(int i = 0; i < serventCount; i++) {
+			for (int j = 0; j < serventCount; j++) {
+				if (i != j) {
+					if (getInfoById(i).getNeighbors().contains(j) &&
+							getInfoById(j).getNeighbors().contains(i)) {
+						transit.put(i + "-" + j, 0);
+					}
+				}
+			}
+		}
+	}
+
+
+
+	/**
+	 * check whether first snapshot is greater than second
+	 * the first is greater if at least one number from the values for each par is greater than the other
+	 */
+	public static boolean isFirstSnapshotGreater(Map<Integer, Integer> first, Map<Integer, Integer> second){
+		for(Integer key : first.keySet()){
+			if(first.get(key) > second.get(key)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -167,6 +226,10 @@ public class AppConfig {
 	 */
 	public static int getServentCount() {
 		return serventInfoList.size();
+	}
+
+	public static List<Integer> getInitiators() {
+		return initiators;
 	}
 	
 }
