@@ -10,19 +10,19 @@ import java.util.Map;
 public class ChildrenInfoMessage extends BasicMessage {
     private static final long serialVersionUID = 312832509576777228L;
     private List<Integer> otherRegions;
-    private Integer subtreeSize;
+    private List<Integer> subtreeChildren;
 
-    public ChildrenInfoMessage(ServentInfo senderInfo, ServentInfo receiverInfo, Map<Integer, Integer> snapshotVersions, List<Integer> otherRegions, Integer subtreeSize) {
+    public ChildrenInfoMessage(ServentInfo senderInfo, ServentInfo receiverInfo, Map<Integer, Integer> snapshotVersions, List<Integer> otherRegions, List<Integer> subtreeChildren) {
         super(MessageType.CHILDREN_INFO, senderInfo,receiverInfo, snapshotVersions);
         this.otherRegions = otherRegions;
-        this.subtreeSize = subtreeSize;
+        this.subtreeChildren = subtreeChildren;
     }
 
     public List<Integer> getOtherRegions() {
         return otherRegions;
     }
 
-    public Integer getSubtreeSize() {
-        return subtreeSize;
+    public List<Integer> getSubtreeChildren() {
+        return subtreeChildren;
     }
 }

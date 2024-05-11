@@ -1,10 +1,14 @@
 package app;
 
 import app.snapshot_bitcake.ChildrenInfoCollector;
+import app.snapshot_bitcake.LYSnapshotResult;
 import app.snapshot_bitcake.SnapshotCollector;
 import app.snapshot_bitcake.SnapshotCollectorWorker;
 import cli.CLIParser;
 import servent.SimpleServentListener;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Describes the procedure for starting a single Servent
@@ -56,14 +60,16 @@ public class ServentMain {
 		}
 		
 		AppConfig.timestampedStandardPrint("Starting servent " + AppConfig.myServentInfo);
-		
+
+		Map<Integer, LYSnapshotResult> collectedLYValues = new ConcurrentHashMap<>();
+
 		// for Spezialetti-Kearns
-		ChildrenInfoCollector childrenInfoCollector = new ChildrenInfoCollector();
+		ChildrenInfoCollector childrenInfoCollector = new ChildrenInfoCollector(collectedLYValues);
 		Thread childrenInfoCollectorThread = new Thread(childrenInfoCollector);
 		childrenInfoCollectorThread.start();
 
 		SnapshotCollector snapshotCollector;
-		snapshotCollector = new SnapshotCollectorWorker(childrenInfoCollector);
+		snapshotCollector = new SnapshotCollectorWorker(childrenInfoCollector, collectedLYValues);
 		Thread snapshotCollectorThread = new Thread(snapshotCollector);
 		snapshotCollectorThread.start();
 

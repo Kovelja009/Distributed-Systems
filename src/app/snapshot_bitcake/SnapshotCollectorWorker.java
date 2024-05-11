@@ -20,12 +20,14 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
 	
 	private AtomicBoolean collecting = new AtomicBoolean(false);
 	
-	private Map<Integer, LYSnapshotResult> collectedLYValues = new ConcurrentHashMap<>();
+	private Map<Integer, LYSnapshotResult> collectedLYValues;
 	
 	private BitcakeManager bitcakeManager;
 
-	public SnapshotCollectorWorker(ChildrenInfoCollector childrenInfoCollector) {
+	public SnapshotCollectorWorker(ChildrenInfoCollector childrenInfoCollector, Map<Integer, LYSnapshotResult> collectedLYValues) {
 		bitcakeManager = new LaiYangBitcakeManager(childrenInfoCollector);
+		this.collectedLYValues = collectedLYValues;
+
 	}
 	
 	@Override
@@ -144,6 +146,17 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
 //			AppConfig.timestampedStandardPrint("==================================================================================");
 //
 //			collectedLYValues.clear(); //reset for next invocation
+
+
+			// wait until childInfoCollector finishes
+			while (((LaiYangBitcakeManager) bitcakeManager).getChildrenInfoCollector().isCollecting()){
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
 			collecting.set(false);
 		}
 

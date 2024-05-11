@@ -1,23 +1,76 @@
-14:14:29 - Starting servent [id: 0 | ipAddress: localhost | port: 1100 | initiator: true]
-14:14:29 - Pausing for 7000 ms
-14:14:30 - Sending message [0|0|0|LY_MARKER|1]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:30 - Sending message [0|1|0|LY_MARKER|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:31 - Got message [1|1||APPROVE|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:31 - Got message [1|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:31 - Got message [2|2|0|LY_MARKER|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:31 - Got message [2|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:31 - Got message [1|2|0|LY_MARKER|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:31 - Got message [2|1||APPROVE|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:32 - Sending message [0|2||DENY|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:32 - Sending message [0|3||DENY|1]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:32 - Got message [3|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:32 - Got message [4|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:33 - Got message [5|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:34 - Got message [1|5||CHILDREN_INFO|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:34 - Got message [7|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:34 - Got message [8|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:35 - Got message [6|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:35 - Got message [9|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:36 - Pausing for 10000 ms
-14:14:46 - Stopping...
-14:14:46 - Red messages: 0
+01:26:36 - Starting servent [id: 0 | ipAddress: localhost | port: 1100 | initiator: true]
+01:26:36 - Pausing for 20000 ms
+01:26:37 - Sending message [0|1|9|TRANSACTION|2]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [0|0|2|TRANSACTION|1]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Got message [2|3|10|TRANSACTION|0]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+01:26:37 - Sending message [0|4|1|TRANSACTION|1]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Got message [2|0|8|TRANSACTION|0]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+01:26:37 - Sending message [0|7|8|TRANSACTION|2]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [0|2|9|TRANSACTION|1]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Got message [2|2|9|TRANSACTION|0]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+01:26:37 - Sending message [0|3|6|TRANSACTION|1]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [0|6|5|TRANSACTION|2]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Got message [2|1|7|TRANSACTION|0]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+01:26:37 - Sending message [0|5|4|TRANSACTION|2]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:38 - Sending message [0|8|0|LY_MARKER|1]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:38 - Sending message [0|9|0|LY_MARKER|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:39 - Got message [2|16||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:39 - Got message [2|17||APPROVE|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:39 - Got message [1|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:39 - Got message [1|1||APPROVE|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:39 - Got message [2|18|0|LY_MARKER|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:39 - Got message [1|2|0|LY_MARKER|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:39 - Sending message [0|10||DENY|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:40 - Got message [3|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:40 - Sending message [0|11||DENY|1]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:40 - Got message [4|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:40 - Got message [5|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:41 - Got message [7|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:41 - Got message [1|5||CHILDREN_INFO|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:41 - Got message [6|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [8|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [1|9|4|TRANSACTION|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [1|7|7|TRANSACTION|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [1|6|3|TRANSACTION|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [1|11|7|TRANSACTION|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [9|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:43 - Got message [10|0||LY_TELL|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:51 - Got message [2|25||CHILDREN_INFO|0]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:51 - I am the master, I don't have a parent.
+01:26:51 - Related children: [2, 1]  -> I am ROOT
+01:26:51 - Unrelated children: []
+01:26:51 - Other regions: []
+01:26:51 - Region size: 11
+01:26:52 - Recorded bitcake amount for 0 = 990
+01:26:52 - Recorded bitcake amount for 1 = 1036
+01:26:52 - Recorded bitcake amount for 2 = 930
+01:26:52 - Recorded bitcake amount for 3 = 1024
+01:26:52 - Recorded bitcake amount for 4 = 1020
+01:26:52 - Recorded bitcake amount for 5 = 1000
+01:26:52 - Recorded bitcake amount for 6 = 1000
+01:26:52 - Recorded bitcake amount for 7 = 1000
+01:26:52 - Recorded bitcake amount for 8 = 1000
+01:26:52 - Recorded bitcake amount for 9 = 1000
+01:26:52 - Recorded bitcake amount for 10 = 1000
+01:26:52 - ---------------
+01:26:52 - Servent 2 gave 24 bitcakes to 3
+01:26:52 - Servent 3 got  24 bitcakes from 2
+01:26:52 - ---------------
+01:26:52 - Servent 2 gave 20 bitcakes to 4
+01:26:52 - Servent 4 got  20 bitcakes from 2
+01:26:52 - ---------------
+01:26:52 - Servent 2 gave 18 bitcakes to 1
+01:26:52 - Servent 1 got  18 bitcakes from 2
+01:26:52 - ---------------
+01:26:52 - Servent 2 gave 34 bitcakes to 0
+01:26:52 - Servent 0 got  34 bitcakes from 2
+01:26:52 - ---------------
+01:26:52 - Servent 0 gave 26 bitcakes to 2
+01:26:52 - Servent 2 got  26 bitcakes from 0
+01:26:52 - ---------------
+01:26:52 - Servent 0 gave 18 bitcakes to 1
+01:26:52 - Servent 1 got  18 bitcakes from 0
+01:26:52 - System bitcake count: 11000
+01:26:52 - ==================================================================================
+01:26:56 - Stopping...
+01:26:56 - Red messages: 0

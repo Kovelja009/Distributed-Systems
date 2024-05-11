@@ -18,6 +18,6 @@ public class ChildrenInfoHandler implements MessageHandler {
     public void run() {
         ChildrenInfoMessage childrenInfoMessage = (ChildrenInfoMessage) clientMessage;
         snapshotCollector.getChildrenInfoCollector().addOtherRegions(childrenInfoMessage.getOtherRegions());
-        snapshotCollector.getChildrenInfoCollector().addSubtreeSize(childrenInfoMessage.getOriginalSenderInfo().getId(), childrenInfoMessage.getSubtreeSize());
+        snapshotCollector.getChildrenInfoCollector().addSubtree(childrenInfoMessage.getOriginalSenderInfo().getId(), childrenInfoMessage.getSubtreeChildren());
     }
 }

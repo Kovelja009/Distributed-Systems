@@ -1,21 +1,51 @@
-14:14:29 - Starting servent [id: 2 | ipAddress: localhost | port: 1300 | initiator: false]
-14:14:29 - Pausing for 10000 ms
-14:14:31 - Got message [0|1|0|LY_MARKER|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:31 - Sending message [2|2|0|LY_MARKER|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:31 - Sending message [2|0||LY_TELL|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:31 - Got message [1|3|0|LY_MARKER|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:31 - Sending message [2|1||APPROVE|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:31 - Sending message [2|3|0|LY_MARKER|1]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:31 - Sending message [2|4|0|LY_MARKER|3]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:32 - Sending message [2|5|0|LY_MARKER|4]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:32 - Got message [0|2||DENY|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:32 - Got message [1|4||DENY|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:32 - Sending message [2|6||DENY|1]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:32 - Got message [3|1||APPROVE|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:32 - Got message [3|2|0|LY_MARKER|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:32 - Got message [4|1||APPROVE|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:32 - Got message [4|2|0|LY_MARKER|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-14:14:33 - Sending message [2|7||DENY|3]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:33 - Sending message [2|8||DENY|4]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-14:14:39 - Stopping...
-14:14:39 - Red messages: 0
+01:26:36 - Starting servent [id: 2 | ipAddress: localhost | port: 1300 | initiator: false]
+01:26:36 - Pausing for 15000 ms
+01:26:37 - Sending message [2|12|7|TRANSACTION|3]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|3|10|TRANSACTION|0]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|5|8|TRANSACTION|3]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|0|8|TRANSACTION|0]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|13|6|TRANSACTION|3]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|8|2|TRANSACTION|1]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Got message [0|1|9|TRANSACTION|2]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+01:26:37 - Got message [0|7|8|TRANSACTION|2]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+01:26:37 - Sending message [2|4|6|TRANSACTION|1]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|2|9|TRANSACTION|0]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|11|1|TRANSACTION|4]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|6|6|TRANSACTION|4]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|7|9|TRANSACTION|1]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Got message [0|6|5|TRANSACTION|2]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+01:26:37 - Sending message [2|10|3|TRANSACTION|3]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|1|7|TRANSACTION|0]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|14|10|TRANSACTION|4]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Got message [0|5|4|TRANSACTION|2]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+01:26:37 - Sending message [2|9|1|TRANSACTION|1]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:37 - Sending message [2|15|3|TRANSACTION|4]        snapshots: {0=-1, 6=-1, 8=-1, 10=-1}
+01:26:38 - Got message [0|9|0|LY_MARKER|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:39 - Sending message [2|16||LY_TELL|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:39 - Sending message [2|17||APPROVE|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:39 - Sending message [2|18|0|LY_MARKER|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:39 - Sending message [2|20|0|LY_MARKER|3]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:39 - Got message [1|3|0|LY_MARKER|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:39 - Sending message [2|19|0|LY_MARKER|1]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:39 - Sending message [2|21|0|LY_MARKER|4]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:40 - Got message [0|10||DENY|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:40 - Got message [3|1||APPROVE|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:40 - Got message [3|2|0|LY_MARKER|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:40 - Got message [4|1||APPROVE|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:40 - Got message [1|4||DENY|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:40 - Sending message [2|22||DENY|1]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:40 - Got message [4|2|0|LY_MARKER|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:40 - Sending message [2|24||DENY|4]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:41 - Sending message [2|23||DENY|3]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:42 - Got message [1|13|6|TRANSACTION|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [1|12|9|TRANSACTION|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [1|10|6|TRANSACTION|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:42 - Got message [1|8|1|TRANSACTION|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:46 - Got message [4|9||CHILDREN_INFO|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:50 - Got message [3|7||CHILDREN_INFO|2]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:50 - Related children: [3, 4]
+01:26:50 - Unrelated children: [0, 1]
+01:26:50 - Other regions: []
+01:26:51 - Sending message [2|25||CHILDREN_INFO|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:51 - Stopping...
+01:26:51 - Red messages: 0

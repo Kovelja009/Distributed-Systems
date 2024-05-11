@@ -1,0 +1,13 @@
+01:26:36 - Starting servent [id: 10 | ipAddress: localhost | port: 2000 | initiator: true]
+01:26:36 - Pausing for 15000 ms
+01:26:42 - Got message [9|4|0|LY_MARKER|10]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:43 - Sending message [10|0||LY_TELL|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:43 - Sending message [10|2|0|LY_MARKER|9]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:43 - Sending message [10|1||APPROVE|9]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:44 - Got message [9|6||DENY|10]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+01:26:45 - Related children: []  -> I am LEAF
+01:26:45 - Unrelated children: [9]
+01:26:45 - Other regions: []
+01:26:45 - Sending message [10|3||CHILDREN_INFO|9]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+01:26:51 - Stopping...
+01:26:51 - Red messages: 0
