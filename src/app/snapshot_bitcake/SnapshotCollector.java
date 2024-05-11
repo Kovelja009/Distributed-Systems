@@ -20,4 +20,6 @@ public interface SnapshotCollector extends Runnable, Cancellable {
 
 	void startCollecting();
 
+	ChildrenInfoCollector getChildrenInfoCollector();
+
 }

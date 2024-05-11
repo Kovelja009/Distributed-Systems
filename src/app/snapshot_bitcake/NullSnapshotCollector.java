@@ -31,4 +31,9 @@ public class NullSnapshotCollector implements SnapshotCollector {
 	public Map<Integer, LYSnapshotResult> getCollectedLYValues() {
 		return Map.of();
 	}
+
+	@Override
+	public ChildrenInfoCollector getChildrenInfoCollector() {
+		return null;
+	}
 }

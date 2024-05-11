@@ -16,11 +16,10 @@ import app.snapshot_bitcake.SnapshotCollector;
 import servent.handler.MessageHandler;
 import servent.handler.NullHandler;
 import servent.handler.TransactionHandler;
-import servent.handler.snapshot.LYMarkerHandler;
-import servent.handler.snapshot.LYTellHandler;
+import servent.handler.snapshot.*;
 import servent.message.Message;
 import servent.message.MessageType;
-import servent.message.snapshot.LYTellMessage;
+import servent.message.snapshot.*;
 import servent.message.util.MessageUtil;
 
 public class SimpleServentListener implements Runnable, Cancellable {
@@ -40,7 +39,7 @@ public class SimpleServentListener implements Runnable, Cancellable {
 	
 	private List<Message> redMessages = new ArrayList<>();
 
-	private static final int ATTEMPTS = 500;
+	private static final int ATTEMPTS = 50;
 	private static int currAttempt = 0;
 	
 	@Override
@@ -68,7 +67,7 @@ public class SimpleServentListener implements Runnable, Cancellable {
 				 * red message. 
 				 */
 
-				// if we have unhandled messages (transaction which are from the "future", we might be able to handle them)
+				// if we have unhandled messages (transactions which are from the "future", we might be able to handle them)
 				// if we still can't handle them, we will put them back in the syncronized block
 				if (redMessages.size() > 0 && currAttempt < ATTEMPTS) {
 					clientMessage = redMessages.remove(0);
@@ -84,9 +83,18 @@ public class SimpleServentListener implements Runnable, Cancellable {
 					currAttempt = 0;
 				}
 				synchronized (AppConfig.colorLock) {
-					// we have newer massage and it is not tell message (because tell might be newer due to other's nodes snapshots)
-					if (AppConfig.isFirstSnapshotGreater(clientMessage.getSnapshotVersions(), AppConfig.snapshotVersions) && clientMessage.getMessageType() != MessageType.LY_TELL) {
-						// if message snapshotversion is bigger than our snapshotversion, store it because we need marker first
+					// if we got old marker just send deny message to the sender and that's it
+					if(!AppConfig.isFirstSnapshotGreater(clientMessage.getSnapshotVersions(), AppConfig.snapshotVersions) && clientMessage.getMessageType() == MessageType.LY_MARKER){
+						int senderId = clientMessage.getOriginalSenderInfo().getId();
+						Message denyMessage = new DenyMessage(
+								AppConfig.myServentInfo, AppConfig.getInfoById(senderId), AppConfig.snapshotVersions, AppConfig.master);
+						MessageUtil.sendMessage(denyMessage);
+						continue;
+					}
+
+					// we have newer message and it is marker or transaction (because tell might be newer due to other's nodes snapshots)
+					if (AppConfig.isFirstSnapshotGreater(clientMessage.getSnapshotVersions(), AppConfig.snapshotVersions) && (clientMessage.getMessageType() == MessageType.LY_MARKER || clientMessage.getMessageType() == MessageType.TRANSACTION)) {
+						// if transaction message snapshotversion is bigger than our snapshotversion, store it because we need marker first
 						if(clientMessage.getMessageType() != MessageType.LY_MARKER) {
 							redMessages.add(clientMessage);
 							continue;
@@ -103,32 +111,17 @@ public class SimpleServentListener implements Runnable, Cancellable {
 								LaiYangBitcakeManager lyFinancialManager =
 										(LaiYangBitcakeManager)snapshotCollector.getBitcakeManager();
 								lyFinancialManager.markerEvent(
-										Integer.parseInt(clientMessage.getMessageText()), snapshotCollector);
+										Integer.parseInt(clientMessage.getMessageText()), snapshotCollector, clientMessage.getOriginalSenderInfo().getId());
+							} else {
+								// messageSnapshot is not newer so we send deny message
+								int senderId = clientMessage.getOriginalSenderInfo().getId();
+								Message denyMessage = new DenyMessage(
+										AppConfig.myServentInfo, AppConfig.getInfoById(senderId), AppConfig.snapshotVersions, AppConfig.master);
+								MessageUtil.sendMessage(denyMessage);
+								continue;
 							}
 						}
 					}
-					// if message is marker then we need to pass it to other nodes
-					// STARO
-//
-//
-//					if (clientMessage.isWhite() == false && AppConfig.isWhite.get()) {
-//						/*
-//						 * If the message is red, we are white, and the message isn't a marker,
-//						 * then store it. We will get the marker soon, and then we will process
-//						 * this message. The point is, we need the marker to know who to send
-//						 * our info to, so this is the simplest way to work around that.
-//						 */
-//						if (clientMessage.getMessageType() != MessageType.LY_MARKER) {
-//							redMessages.add(clientMessage);
-//							continue;
-//						} else {
-//							// This is the marker, we need to pass it to the other nodes
-//							LaiYangBitcakeManager lyFinancialManager =
-//									(LaiYangBitcakeManager)snapshotCollector.getBitcakeManager();
-//							lyFinancialManager.markerEvent(
-//									Integer.parseInt(clientMessage.getMessageText()), snapshotCollector);
-//						}
-//					}
 				}
 				
 				MessageHandler messageHandler = new NullHandler(clientMessage);
@@ -139,16 +132,28 @@ public class SimpleServentListener implements Runnable, Cancellable {
 				 * because that way is much simpler and less error prone.
 				 */
 				switch (clientMessage.getMessageType()) {
-				case TRANSACTION: // standard message
-					messageHandler = new TransactionHandler(clientMessage, snapshotCollector.getBitcakeManager());
-					break;
-				case LY_MARKER: // marker message
-					messageHandler = new LYMarkerHandler();
-					break;
-				case LY_TELL: // received snapshot
-					messageHandler = new LYTellHandler(clientMessage, snapshotCollector);
+					case TRANSACTION: // standard message
+						messageHandler = new TransactionHandler(clientMessage, snapshotCollector.getBitcakeManager());
+						break;
+					case LY_MARKER: // marker message
+						messageHandler = new LYMarkerHandler();
+						break;
+					case LY_TELL: // received snapshot
+						messageHandler = new LYTellHandler(clientMessage, snapshotCollector);
+						break;
+					case APPROVE: // we are becoming a parent, yay!
+						messageHandler = new ApproveHandler(clientMessage, snapshotCollector);
+						break;
+					case DENY: // we are not becoming a parent, oh no!
+						// just add region which is next to us
+						messageHandler = new DenyHandler(snapshotCollector, clientMessage);
+						break;
+					case CHILDREN_INFO:
+						// notify parent about other regions and subtree size
+						messageHandler = new ChildrenInfoHandler(snapshotCollector, clientMessage);
+						break;
 				}
-				
+
 				threadPool.submit(messageHandler);
 			} catch (SocketTimeoutException timeoutEx) {
 				//Uncomment the next line to see that we are waking up every second.

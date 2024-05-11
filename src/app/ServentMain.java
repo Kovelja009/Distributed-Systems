@@ -1,5 +1,6 @@
 package app;
 
+import app.snapshot_bitcake.ChildrenInfoCollector;
 import app.snapshot_bitcake.SnapshotCollector;
 import app.snapshot_bitcake.SnapshotCollectorWorker;
 import cli.CLIParser;
@@ -56,12 +57,17 @@ public class ServentMain {
 		
 		AppConfig.timestampedStandardPrint("Starting servent " + AppConfig.myServentInfo);
 		
+		// for Spezialetti-Kearns
+		ChildrenInfoCollector childrenInfoCollector = new ChildrenInfoCollector();
+		Thread childrenInfoCollectorThread = new Thread(childrenInfoCollector);
+		childrenInfoCollectorThread.start();
+
 		SnapshotCollector snapshotCollector;
-		
-		snapshotCollector = new SnapshotCollectorWorker();
+		snapshotCollector = new SnapshotCollectorWorker(childrenInfoCollector);
 		Thread snapshotCollectorThread = new Thread(snapshotCollector);
 		snapshotCollectorThread.start();
-		
+
+
 		SimpleServentListener simpleListener = new SimpleServentListener(snapshotCollector);
 		Thread listenerThread = new Thread(simpleListener);
 		listenerThread.start();

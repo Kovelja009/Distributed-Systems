@@ -49,6 +49,15 @@ public class AppConfig {
 	 */
 	public static Map<Integer, Integer> snapshotVersions = new ConcurrentHashMap<>();
 
+
+	////////////////////////////////// Spezialetti-Kearns //////////////////////////////////
+	// should reset after at the end of iteration (when I send info to the parent about my children and other regions)
+	public static Integer parent = -1;
+
+	// should reset after at the end of iteration (when I send info to the parent about my children and other regions)
+	public static Integer master = -1;
+	///////////////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * Print a message to stdout with a timestamp
 	 * @param message message to print

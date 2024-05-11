@@ -1,0 +1,18 @@
+14:14:29 - Starting servent [id: 8 | ipAddress: localhost | port: 1900 | initiator: true]
+14:14:29 - Pausing for 10000 ms
+14:14:34 - Got message [7|3|0|LY_MARKER|8]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+14:14:34 - Sending message [8|0||LY_TELL|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+14:14:34 - Sending message [8|1||APPROVE|7]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+14:14:34 - Sending message [8|2|0|LY_MARKER|6]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+14:14:35 - Sending message [8|3|0|LY_MARKER|7]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+14:14:35 - Got message [6|3|0|LY_MARKER|8]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+14:14:35 - Sending message [8|4|0|LY_MARKER|9]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+14:14:35 - Got message [6|5||DENY|8]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+14:14:35 - Got message [7|4||DENY|8]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+14:14:35 - Got message [9|3|0|LY_MARKER|8]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+14:14:35 - Got message [9|5||DENY|8]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+14:14:36 - Sending message [8|5||DENY|6]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+14:14:36 - Sending message [8|6||DENY|9]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+14:14:37 - Sending message [8|7||CHILDREN_INFO|7]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+14:14:39 - Stopping...
+14:14:39 - Red messages: 0
