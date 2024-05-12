@@ -5,6 +5,9 @@ import app.Cancellable;
 import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.snapshot.ChildrenInfoMessage;
+import servent.message.snapshot.DoneMessage;
+import servent.message.snapshot.NoRegionInfoMessage;
+import servent.message.snapshot.RegionInfoMessage;
 import servent.message.util.MessageUtil;
 
 import java.util.ArrayList;
@@ -34,11 +37,22 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
 
     private Map<Integer, LYSnapshotResult> collectedLYValues;
 
+    private Map<Integer, LYSnapshotResult> fromOtherRegions = new ConcurrentHashMap<>();
+    private Map<String, Integer> fromOtherTransit = new ConcurrentHashMap<>();
+    private static final Object fromOtherRegionsLock = new Object();
+    private static final Object fromOtherTransitLock = new Object();
+
+    public static Object InfocntLock = new Object();
+    public static Object noInfocntLock = new Object();
+
+    public static int regionInfocnt = 0;
+    public static int noRegionInfocnt = 0;
+
     public ChildrenInfoCollector(Map<Integer, LYSnapshotResult> collectedLYValues) {
         this.collectedLYValues = collectedLYValues;
     }
 
-    // TODO: see who needs to stop it (SimpleServentListener stops it for now)
+
     @Override
     public void stop() {
         working = false;
@@ -74,6 +88,9 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                if(working == false) {
+                    return;
+                }
             }
 
             // wait for all children to give me their subtrees and other regions info
@@ -82,6 +99,9 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }
+                if(working == false) {
+                    return;
                 }
             }
 
@@ -106,46 +126,140 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
                 AppConfig.timestampedStandardPrint("Unrelated children: " + unrelatedChildren);
                 AppConfig.timestampedStandardPrint("Other regions: " + otherRegion);
                 AppConfig.timestampedStandardPrint("Region size: " + wholeSubtree.size());
-                calculatingSnapshot(wholeSubtree);
+
+                // 2 wait for responses in our region to finish
+                boolean waitingResults = true;
+                while (waitingResults) {
+                    if (collectedLYValues.size() == wholeSubtree.size()) {
+                        waitingResults = false;
+                    }
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (working == false) {
+                        return;
+                    }
+                }
+
+                // level out with other regions
+                levelingOut();
+                calculatingSnapshot();
+
+                finishSnapshot();
             }
 
+            // wait for the done message from parent
+            while(collecting.get() == true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(working == false) {
+                    return;
+                }
+            }
 
-            ///////// reseting for next iteration /////////
-            collectedLYValues.clear(); //reset for next invocation
-            relatedChildren.clear();
-            unrelatedChildren.clear();
+            AppConfig.timestampedStandardPrint("Ready for next snapshot.");
 
-            otherRegion.clear();
-            childTreeNodes = new ConcurrentHashMap<>();
-
-            AppConfig.master = -1;
-            AppConfig.parent = -1;
-
-            collecting.set(false);
         }
 
     }
 
-    private void calculatingSnapshot(List<Integer> region){
-    // 2 wait for responses or finish
-        boolean waitingResults = true;
-        while (waitingResults) {
-            if (collectedLYValues.size() == region.size()) {
-                waitingResults = false;
+    public void finishSnapshot() {
+        // send done message to all my children (which will propagate it through the network)
+        for(Integer child : relatedChildren) {
+            Message doneMessage = new DoneMessage(
+                    AppConfig.myServentInfo, AppConfig.getInfoById(child), AppConfig.snapshotVersions);
+            MessageUtil.sendMessage(doneMessage);
+        }
+
+        //reset for next invocation
+        for(Map.Entry<Integer, LYSnapshotResult> entry : collectedLYValues.entrySet()) {
+            // reset the give and get history for each neighbour
+            for(Integer neighbour : entry.getValue().getGetHistory().keySet())
+                entry.getValue().getGetHistory().put(neighbour, 0);
+            for(Integer neighbour : entry.getValue().getGiveHistory().keySet())
+                entry.getValue().getGiveHistory().put(neighbour, 0);
+        }
+        collectedLYValues = new ConcurrentHashMap<>();
+        relatedChildren.clear();
+        unrelatedChildren.clear();
+
+        otherRegion.clear();
+        childTreeNodes = new ConcurrentHashMap<>();
+
+        AppConfig.master = -1;
+        AppConfig.parent = -1;
+
+        collecting.set(false);
+    }
+
+    private void levelingOut() {
+        boolean isDone = false;
+        int level = 0;
+
+        while(!isDone) {
+            AppConfig.timestampedStandardPrint("Leveling out: " + level++);
+            // 1. Send leveling message to all other regions
+            for(Integer region : otherRegion) {
+                Message regionMessage = new RegionInfoMessage(
+                        AppConfig.myServentInfo, AppConfig.getInfoById(region), AppConfig.snapshotVersions, collectedLYValues, AppConfig.transit);
+                MessageUtil.sendMessage(regionMessage);
+                AppConfig.timestampedStandardPrint("Sending region info to " + region + " data is: " + otherRegion);
             }
 
+            // 2. Check for anything new
+            synchronized (fromOtherRegionsLock){
+                for(Map.Entry<Integer, LYSnapshotResult> regionResult : fromOtherRegions.entrySet()) {
+                    if(!collectedLYValues.containsKey(regionResult.getKey())) {
+                        collectedLYValues.put(regionResult.getKey(), regionResult.getValue());
+                    }
+                }
+            }
+
+            synchronized (fromOtherTransitLock){
+                for(Map.Entry<String, Integer> otherTransit : fromOtherTransit.entrySet()) {
+                    // add value to our transit
+                    int oldValue = AppConfig.transit.getOrDefault(otherTransit.getKey(), 0);
+                    AppConfig.transit.put(otherTransit.getKey(), oldValue + otherTransit.getValue());
+                }
+            }
+
+
+            // 3. Check if we are done
+            if(collectedLYValues.size() == AppConfig.getServentCount()) {
+                isDone = true;
+            }
+
+            // sleep for a while
             try {
-                Thread.sleep(1000);
+                Thread.sleep(700);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            if (working == false) {
+            if(working == false) {
                 return;
             }
         }
 
-//			// print
+        AppConfig.timestampedStandardPrint("Final level: " + level);
+
+        // 5. if we are done then send no more info message to all other regions
+        for(Integer region : otherRegion) {
+            Message noInfoMessage = new NoRegionInfoMessage(
+                    AppConfig.myServentInfo, AppConfig.getInfoById(region), AppConfig.snapshotVersions, collectedLYValues, AppConfig.transit);
+            MessageUtil.sendMessage(noInfoMessage);
+        }
+
+    }
+
+    private void calculatingSnapshot(){
+		// print
         int sum = 0;
         for (Map.Entry<Integer, LYSnapshotResult> nodeResult : collectedLYValues.entrySet()) {
             sum += nodeResult.getValue().getRecordedAmount();
@@ -153,8 +267,8 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
                     "Recorded bitcake amount for " + nodeResult.getKey() + " = " + nodeResult.getValue().getRecordedAmount());
         }
 
-        for(int i : region) {
-            for (int j : region) {
+        for(int i = 0; i < AppConfig.getServentCount(); i++) {
+            for (int j = 0; j < AppConfig.getServentCount(); j++) {
                 if (i != j) {
                     if (AppConfig.getInfoById(i).getNeighbors().contains(j) &&
                         AppConfig.getInfoById(j).getNeighbors().contains(i)) {
@@ -198,6 +312,34 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
 
     }
 
+    public void incrementRegionInfocnt() {
+        synchronized (InfocntLock) {
+            regionInfocnt++;
+        }
+    }
+
+    public void incrementNoRegionInfocnt() {
+        synchronized (noInfocntLock) {
+            noRegionInfocnt++;
+        }
+    }
+
+    public void addRegionInfo(Map<Integer, LYSnapshotResult> newInfo){
+        synchronized (fromOtherRegionsLock){
+            fromOtherRegions.putAll(newInfo);
+        }
+    }
+
+    public void addTransitInfo(Map<String, Integer> newTransit){
+        synchronized (fromOtherTransitLock){
+            // go through list and update values
+            for(Map.Entry<String, Integer> entry : newTransit.entrySet()){
+                int oldValue = fromOtherTransit.getOrDefault(entry.getKey(), 0);
+                fromOtherTransit.put(entry.getKey(), oldValue + entry.getValue());
+            }
+        }
+    }
+
     public boolean isCollecting(){
         return collecting.get();
     }
@@ -239,7 +381,7 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
         boolean oldValue = this.collecting.getAndSet(true);
 
         if (oldValue == true) {
-            AppConfig.timestampedErrorPrint("Tried to start collecting before finished with previous.");
+            AppConfig.timestampedErrorPrint("Tried to start collecting before finished with previous.[ChildrenCollector]");
         }
     }
 }

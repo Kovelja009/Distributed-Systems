@@ -1,22 +1,90 @@
-01:26:36 - Starting servent [id: 6 | ipAddress: localhost | port: 1700 | initiator: true]
-01:26:36 - Pausing for 15000 ms
-01:26:41 - Got message [5|4|0|LY_MARKER|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:41 - Sending message [6|1||APPROVE|5]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:41 - Sending message [6|3|0|LY_MARKER|8]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:41 - Sending message [6|2|0|LY_MARKER|5]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:41 - Sending message [6|0||LY_TELL|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [6|4|0|LY_MARKER|9]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Got message [8|2|0|LY_MARKER|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:42 - Got message [5|6||DENY|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:42 - Got message [8|5||DENY|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:42 - Got message [9|2|0|LY_MARKER|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:42 - Sending message [6|5||DENY|8]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Got message [9|1||APPROVE|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:43 - Sending message [6|6||DENY|9]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:47 - Got message [9|7||CHILDREN_INFO|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:47 - Related children: [9]
-01:26:47 - Unrelated children: [5, 8]
-01:26:47 - Other regions: []
-01:26:48 - Sending message [6|7||CHILDREN_INFO|5]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:51 - Stopping...
-01:26:51 - Red messages: 0
+23:54:26 - Starting servent [id: 6 | ipAddress: localhost | port: 1700 | initiator: true]
+23:54:26 - Pausing for 15000 ms
+23:54:28 - Got message [8|0|8|LY_MARKER|6]        snapshots: {0=-1, 8=0, 10=-1, 6=-1}
+23:54:28 - Sending message [6|1|6|LY_MARKER|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:28 - Sending message [6|0|6|LY_MARKER|5]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:28 - Sending message [6|2|6|LY_MARKER|9]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:28 - Sending message [6|3||DENY|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:28 - Got message [8|3||DENY|6]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:28 - Got message [9|2|8|LY_MARKER|6]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:29 - Got message [5|0||LY_TELL|6]        snapshots: {0=-1, 8=-1, 10=-1, 6=0}
+23:54:29 - Got message [5|4|6|LY_MARKER|6]        snapshots: {0=-1, 8=-1, 10=-1, 6=0}
+23:54:29 - Got message [5|1||APPROVE|6]        snapshots: {0=-1, 8=-1, 10=-1, 6=0}
+23:54:29 - Got message [9|5||DENY|6]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:29 - Sending message [6|4||DENY|9]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:29 - Got message [3|0||LY_TELL|6]        snapshots: {0=0, 8=0, 10=-1, 6=0}
+23:54:30 - Sending message [6|5||DENY|5]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:33 - Got message [5|7||CHILDREN_INFO|6]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:33 - I am the master, I don't have a parent.
+23:54:33 - Related children: [5]  -> I am ROOT
+23:54:33 - Unrelated children: [8, 9]
+23:54:33 - Other regions: [8, 0]
+23:54:33 - Region size: 3
+23:54:33 - Got message [0|12||REGION_INFO|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:33 - Region info received is: {0=app.snapshot_bitcake.LYSnapshotResult@19c27921, 1=app.snapshot_bitcake.LYSnapshotResult@1dfdfec1, 2=app.snapshot_bitcake.LYSnapshotResult@58ff731a}
+23:54:34 - Got message [0|14||REGION_INFO|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:34 - Region info received is: {0=app.snapshot_bitcake.LYSnapshotResult@63eccda9, 1=app.snapshot_bitcake.LYSnapshotResult@69edab84, 2=app.snapshot_bitcake.LYSnapshotResult@1b144b8e}
+23:54:34 - Leveling out: 0
+23:54:34 - Sending region info to 8 data is: [8, 0]
+23:54:34 - Sending region info to 0 data is: [8, 0]
+23:54:35 - Got message [0|16||REGION_INFO|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:35 - Region info received is: {0=app.snapshot_bitcake.LYSnapshotResult@38d08c55, 1=app.snapshot_bitcake.LYSnapshotResult@3dd49f63, 2=app.snapshot_bitcake.LYSnapshotResult@39e1a2d6}
+23:54:35 - Got message [8|6||REGION_INFO|6]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:35 - Region info received is: {0=app.snapshot_bitcake.LYSnapshotResult@10c65f, 1=app.snapshot_bitcake.LYSnapshotResult@3c9e502c, 2=app.snapshot_bitcake.LYSnapshotResult@2528ff5b, 4=app.snapshot_bitcake.LYSnapshotResult@116b0e3a, 7=app.snapshot_bitcake.LYSnapshotResult@17cf1076, 8=app.snapshot_bitcake.LYSnapshotResult@591e2d93, 9=app.snapshot_bitcake.LYSnapshotResult@3b2ed3cc, 10=app.snapshot_bitcake.LYSnapshotResult@727d004d}
+23:54:35 - Sending message [6|7||REGION_INFO|0]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:35 - Sending message [6|6||REGION_INFO|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:35 - Leveling out: 1
+23:54:35 - Sending region info to 8 data is: [8, 0]
+23:54:35 - Sending region info to 0 data is: [8, 0]
+23:54:35 - Got message [8|8||REGION_INFO|6]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:35 - Region info received is: {0=app.snapshot_bitcake.LYSnapshotResult@1ddef2d4, 1=app.snapshot_bitcake.LYSnapshotResult@35043649, 2=app.snapshot_bitcake.LYSnapshotResult@78792396, 4=app.snapshot_bitcake.LYSnapshotResult@621c3bbc, 7=app.snapshot_bitcake.LYSnapshotResult@8be2d79, 8=app.snapshot_bitcake.LYSnapshotResult@1c9cf459, 9=app.snapshot_bitcake.LYSnapshotResult@2d4801cf, 10=app.snapshot_bitcake.LYSnapshotResult@2e0a0e01}
+23:54:35 - Sending message [6|8||REGION_INFO|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:35 - Got message [0|18||REGION_INFO|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:35 - Region info received is: {0=app.snapshot_bitcake.LYSnapshotResult@57a63b5c, 1=app.snapshot_bitcake.LYSnapshotResult@2c6333cd, 2=app.snapshot_bitcake.LYSnapshotResult@41c819f7}
+23:54:35 - Sending message [6|9||REGION_INFO|0]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:35 - Final level: 2
+23:54:35 - Recorded bitcake amount for 0 = 972
+23:54:35 - Recorded bitcake amount for 1 = 1048
+23:54:35 - Recorded bitcake amount for 2 = 935
+23:54:35 - Recorded bitcake amount for 3 = 1021
+23:54:35 - Recorded bitcake amount for 4 = 1024
+23:54:35 - Recorded bitcake amount for 5 = 1000
+23:54:35 - Recorded bitcake amount for 6 = 1000
+23:54:35 - Recorded bitcake amount for 7 = 1000
+23:54:35 - Recorded bitcake amount for 8 = 1000
+23:54:35 - Recorded bitcake amount for 9 = 1000
+23:54:35 - Recorded bitcake amount for 10 = 1000
+23:54:35 - System bitcake count: 11000
+23:54:35 - ==================================================================================
+23:54:35 - Ready for next snapshot.
+23:54:36 - Sending message [6|10||NO_REGION_INFO|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:36 - Got message [0|20||REGION_INFO|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:36 - Region info received is: {0=app.snapshot_bitcake.LYSnapshotResult@3fcc6dc9, 1=app.snapshot_bitcake.LYSnapshotResult@59d6cdb7, 2=app.snapshot_bitcake.LYSnapshotResult@6c9e601b, 3=app.snapshot_bitcake.LYSnapshotResult@6d98dbde, 4=app.snapshot_bitcake.LYSnapshotResult@31664181, 5=app.snapshot_bitcake.LYSnapshotResult@5e32996f, 6=app.snapshot_bitcake.LYSnapshotResult@41b3b40a, 7=app.snapshot_bitcake.LYSnapshotResult@6aded1c9, 8=app.snapshot_bitcake.LYSnapshotResult@6937ff5a, 9=app.snapshot_bitcake.LYSnapshotResult@2304faf2, 10=app.snapshot_bitcake.LYSnapshotResult@7fcb097c}
+23:54:36 - Sending message [6|12||DONE|5]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:36 - Got message [8|10||REGION_INFO|6]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:36 - Region info received is: {0=app.snapshot_bitcake.LYSnapshotResult@6307dfd5, 1=app.snapshot_bitcake.LYSnapshotResult@359c31c0, 2=app.snapshot_bitcake.LYSnapshotResult@314b8eeb, 3=app.snapshot_bitcake.LYSnapshotResult@166ce157, 4=app.snapshot_bitcake.LYSnapshotResult@4bc87d38, 5=app.snapshot_bitcake.LYSnapshotResult@1f0e47b0, 6=app.snapshot_bitcake.LYSnapshotResult@725fae6c, 7=app.snapshot_bitcake.LYSnapshotResult@3c89f29, 8=app.snapshot_bitcake.LYSnapshotResult@b6113d5, 9=app.snapshot_bitcake.LYSnapshotResult@663fe6ce, 10=app.snapshot_bitcake.LYSnapshotResult@699c08ab}
+23:54:36 - Sending message [6|11||NO_REGION_INFO|0]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:37 - Got message [0|22||NO_REGION_INFO|6]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:37 - ALL REGIONS INFO RECEIVED: 11
+23:54:37 - Got message [8|12||NO_REGION_INFO|6]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:37 - ALL REGIONS INFO RECEIVED: 11
+23:54:41 - Pausing for 30000 ms
+23:54:48 - Got message [5|13|0|LY_MARKER|6]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:49 - Got message [8|18|0|LY_MARKER|6]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:49 - Sending message [6|14||APPROVE|5]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:49 - Sending message [6|13||LY_TELL|0]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:49 - Sending message [6|16|0|LY_MARKER|8]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:49 - Sending message [6|15|0|LY_MARKER|5]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:49 - Got message [9|11|0|LY_MARKER|6]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:49 - Sending message [6|17|0|LY_MARKER|9]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:49 - Sending message [6|18||DENY|8]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:50 - Got message [8|21||DENY|6]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:50 - Got message [5|15||DENY|6]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:50 - Sending message [6|19||DENY|9]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:50 - Got message [9|14||DENY|6]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:51 - Related children: []  -> I am LEAF
+23:54:51 - Unrelated children: [8, 5, 9]
+23:54:51 - Other regions: []
+23:54:52 - Sending message [6|20||CHILDREN_INFO|5]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:55:11 - Stopping...
+23:55:11 - Red messages: 0

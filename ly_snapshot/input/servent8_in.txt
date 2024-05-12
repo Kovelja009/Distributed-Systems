@@ -1,3 +1,5 @@
+bitcake_info
 pause 7000
 pause 15000
+pause 20000
 stop

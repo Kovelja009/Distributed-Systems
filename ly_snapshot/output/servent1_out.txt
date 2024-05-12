@@ -1,34 +1,50 @@
-01:26:36 - Starting servent [id: 1 | ipAddress: localhost | port: 1200 | initiator: false]
-01:26:36 - Pausing for 5000 ms
-01:26:37 - Got message [0|0|2|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
-01:26:37 - Got message [2|8|2|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
-01:26:37 - Got message [0|4|1|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
-01:26:37 - Got message [0|2|9|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
-01:26:37 - Got message [2|4|6|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
-01:26:37 - Got message [0|3|6|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
-01:26:37 - Got message [2|7|9|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
-01:26:37 - Got message [2|9|1|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
-01:26:38 - Got message [0|8|0|LY_MARKER|1]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:39 - Sending message [1|0||LY_TELL|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:39 - Sending message [1|1||APPROVE|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:39 - Sending message [1|2|0|LY_MARKER|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:39 - Sending message [1|3|0|LY_MARKER|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:39 - Got message [2|19|0|LY_MARKER|1]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:40 - Got message [0|11||DENY|1]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:40 - Sending message [1|4||DENY|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:40 - Got message [2|22||DENY|1]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:40 - Related children: []  -> I am LEAF
-01:26:40 - Unrelated children: [0, 2]
-01:26:40 - Other regions: []
-01:26:41 - Sending message [1|5||CHILDREN_INFO|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:41 - Pausing for 15000 ms
-01:26:42 - Sending message [1|13|6|TRANSACTION|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [1|9|4|TRANSACTION|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [1|7|7|TRANSACTION|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [1|12|9|TRANSACTION|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [1|6|3|TRANSACTION|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [1|10|6|TRANSACTION|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [1|11|7|TRANSACTION|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [1|8|1|TRANSACTION|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:56 - Stopping...
-01:26:56 - Red messages: 0
+23:54:26 - Starting servent [id: 1 | ipAddress: localhost | port: 1200 | initiator: false]
+23:54:26 - Pausing for 5000 ms
+23:54:27 - Got message [0|3|9|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+23:54:27 - Got message [0|1|2|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+23:54:27 - Got message [2|8|6|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+23:54:27 - Got message [0|5|3|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+23:54:27 - Got message [2|4|9|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+23:54:27 - Got message [2|5|7|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+23:54:27 - Got message [0|0|6|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+23:54:27 - Got message [2|9|6|TRANSACTION|1]        snapshots: {0=-1, 8=-1, 10=-1, 6=-1}
+23:54:28 - Got message [0|8|0|LY_MARKER|1]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:28 - Sending message [1|0||LY_TELL|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:28 - Sending message [1|2|0|LY_MARKER|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:29 - Sending message [1|3|0|LY_MARKER|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:29 - Got message [2|19|0|LY_MARKER|1]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:29 - Sending message [1|1||APPROVE|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:29 - Got message [0|10||DENY|1]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:29 - Got message [2|22||DENY|1]        snapshots: {0=0, 8=-1, 10=-1, 6=0}
+23:54:30 - Sending message [1|4||DENY|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:30 - Related children: []  -> I am LEAF
+23:54:30 - Unrelated children: [0, 2]
+23:54:30 - Other regions: []
+23:54:31 - Sending message [1|5||CHILDREN_INFO|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:31 - Pausing for 15000 ms
+23:54:32 - Sending message [1|11|10|TRANSACTION|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:32 - Sending message [1|10|7|TRANSACTION|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:32 - Sending message [1|7|5|TRANSACTION|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:32 - Sending message [1|9|2|TRANSACTION|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:32 - Sending message [1|13|2|TRANSACTION|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:32 - Sending message [1|6|10|TRANSACTION|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:32 - Sending message [1|8|4|TRANSACTION|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:32 - Sending message [1|12|6|TRANSACTION|2]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
+23:54:37 - Got message [0|25||DONE|1]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
+23:54:37 - Ready for next snapshot.
+23:54:45 - Got message [0|26|0|LY_MARKER|1]        snapshots: {0=1, 8=-1, 10=-1, 6=-1}
+23:54:45 - Sending message [1|14||LY_TELL|0]        snapshots: {0=1, 6=-1, 8=-1, 10=-1}
+23:54:45 - Sending message [1|15||APPROVE|0]        snapshots: {0=1, 6=-1, 8=-1, 10=-1}
+23:54:46 - Sending message [1|17|0|LY_MARKER|2]        snapshots: {0=1, 6=-1, 8=-1, 10=-1}
+23:54:46 - Sending message [1|16|0|LY_MARKER|0]        snapshots: {0=1, 6=-1, 8=-1, 10=-1}
+23:54:46 - Pausing for 20000 ms
+23:54:46 - Got message [2|29|0|LY_MARKER|1]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:46 - Got message [0|28||DENY|1]        snapshots: {0=1, 8=-1, 10=-1, 6=-1}
+23:54:47 - Got message [2|32||DENY|1]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:47 - Sending message [1|18||DENY|2]        snapshots: {0=1, 6=-1, 8=-1, 10=-1}
+23:54:48 - Related children: []  -> I am LEAF
+23:54:48 - Unrelated children: [0, 2]
+23:54:48 - Other regions: []
+23:54:48 - Sending message [1|19||CHILDREN_INFO|0]        snapshots: {0=1, 6=-1, 8=-1, 10=-1}
+23:55:06 - Stopping...
+23:55:06 - Red messages: 0

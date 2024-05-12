@@ -152,6 +152,18 @@ public class SimpleServentListener implements Runnable, Cancellable {
 						// notify parent about other regions and subtree size
 						messageHandler = new ChildrenInfoHandler(snapshotCollector, clientMessage);
 						break;
+					case REGION_INFO:
+						// notify collector about surrounding regions
+						messageHandler = new RegionInfoHandler(snapshotCollector, clientMessage);
+						break;
+					case NO_REGION_INFO:
+						// append collector's noRegion counter
+						messageHandler = new NoRegionInfoHandler(snapshotCollector, clientMessage);
+						break;
+					case DONE:
+						// we are done with the snapshot, so we reset all values in the childrenInfoCollector
+						messageHandler = new DoneHandler(snapshotCollector);
+						break;
 				}
 
 				threadPool.submit(messageHandler);

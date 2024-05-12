@@ -1,4 +1,6 @@
+bitcake_info
 transaction_burst
+pause 18000
 bitcake_info
 pause 20000
 stop

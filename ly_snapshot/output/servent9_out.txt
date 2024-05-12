@@ -1,22 +1,44 @@
-01:26:36 - Starting servent [id: 9 | ipAddress: localhost | port: 1990 | initiator: false]
-01:26:36 - Pausing for 15000 ms
-01:26:42 - Got message [6|4|0|LY_MARKER|9]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:42 - Got message [8|4|0|LY_MARKER|9]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:42 - Sending message [9|2|0|LY_MARKER|6]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [9|0||LY_TELL|0]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [9|1||APPROVE|6]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [9|4|0|LY_MARKER|10]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:42 - Sending message [9|3|0|LY_MARKER|8]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:43 - Sending message [9|5||DENY|8]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:43 - Got message [6|6||DENY|9]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:43 - Got message [8|6||DENY|9]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:43 - Got message [10|2|0|LY_MARKER|9]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:43 - Got message [10|1||APPROVE|9]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:44 - Sending message [9|6||DENY|10]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:45 - Got message [10|3||CHILDREN_INFO|9]        snapshots: {0=0, 8=-1, 10=-1, 6=-1}
-01:26:46 - Related children: [10]
-01:26:46 - Unrelated children: [6, 8]
-01:26:46 - Other regions: []
-01:26:47 - Sending message [9|7||CHILDREN_INFO|6]        snapshots: {0=0, 6=-1, 8=-1, 10=-1}
-01:26:51 - Stopping...
-01:26:51 - Red messages: 0
+23:54:26 - Starting servent [id: 9 | ipAddress: localhost | port: 1990 | initiator: false]
+23:54:26 - Pausing for 15000 ms
+23:54:28 - Got message [8|2|8|LY_MARKER|9]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:28 - Got message [6|2|6|LY_MARKER|9]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:28 - Sending message [9|2|8|LY_MARKER|6]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:29 - Sending message [9|0||LY_TELL|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:29 - Sending message [9|1||APPROVE|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:29 - Sending message [9|3|8|LY_MARKER|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:29 - Sending message [9|5||DENY|6]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:29 - Sending message [9|4|8|LY_MARKER|10]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:29 - Got message [6|4||DENY|9]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:29 - Got message [8|5||DENY|9]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:30 - Got message [10|2|8|LY_MARKER|9]        snapshots: {0=-1, 8=0, 10=-1, 6=-1}
+23:54:30 - Got message [10|1||APPROVE|9]        snapshots: {0=-1, 8=0, 10=-1, 6=-1}
+23:54:30 - Sending message [9|6||DENY|10]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:32 - Got message [10|3||CHILDREN_INFO|9]        snapshots: {0=-1, 8=0, 10=-1, 6=-1}
+23:54:32 - Related children: [10]
+23:54:32 - Unrelated children: [6, 8]
+23:54:32 - Other regions: [6]
+23:54:33 - Sending message [9|7||CHILDREN_INFO|8]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:37 - Got message [8|15||DONE|9]        snapshots: {0=-1, 8=0, 10=-1, 6=0}
+23:54:37 - Ready for next snapshot.
+23:54:37 - Sending message [9|8||DONE|10]        snapshots: {0=-1, 6=0, 8=0, 10=-1}
+23:54:41 - Pausing for 25000 ms
+23:54:49 - Got message [8|20|0|LY_MARKER|9]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:49 - Sending message [9|11|0|LY_MARKER|6]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:49 - Got message [6|17|0|LY_MARKER|9]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:49 - Sending message [9|10||APPROVE|8]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:50 - Sending message [9|9||LY_TELL|0]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:50 - Sending message [9|13|0|LY_MARKER|10]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:50 - Sending message [9|12|0|LY_MARKER|8]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:50 - Got message [6|19||DENY|9]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:50 - Got message [8|22||DENY|9]        snapshots: {0=1, 8=0, 10=-1, 6=0}
+23:54:50 - Sending message [9|14||DENY|6]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:50 - Got message [10|5||APPROVE|9]        snapshots: {0=1, 8=0, 10=-1, 6=-1}
+23:54:50 - Got message [10|6|0|LY_MARKER|9]        snapshots: {0=1, 8=0, 10=-1, 6=-1}
+23:54:51 - Sending message [9|15||DENY|10]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:54:52 - Got message [10|7||CHILDREN_INFO|9]        snapshots: {0=1, 8=0, 10=-1, 6=-1}
+23:54:53 - Related children: [10]
+23:54:53 - Unrelated children: [6, 8]
+23:54:53 - Other regions: []
+23:54:53 - Sending message [9|16||CHILDREN_INFO|8]        snapshots: {0=1, 6=0, 8=0, 10=-1}
+23:55:06 - Stopping...
+23:55:06 - Red messages: 0

@@ -69,6 +69,7 @@ public class DelayedMessageSender implements Runnable {
 			}
 		} catch (IOException e) {
 			AppConfig.timestampedErrorPrint("Couldn't send message: " + messageToSend.toString());
+			e.printStackTrace();
 		}
 	}
 	

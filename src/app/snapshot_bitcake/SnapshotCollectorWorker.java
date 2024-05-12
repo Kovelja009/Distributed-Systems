@@ -155,6 +155,9 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				if(working == false){
+					return;
+				}
 			}
 
 			collecting.set(false);
