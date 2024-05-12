@@ -200,6 +200,9 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
     }
 
     private void levelingOut() {
+        if (otherRegion.isEmpty()) {
+            return;
+        }
         boolean isDone = false;
         int level = 0;
 
