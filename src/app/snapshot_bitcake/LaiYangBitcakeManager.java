@@ -158,9 +158,9 @@ public class LaiYangBitcakeManager implements BitcakeManager {
 
 	private void resetGiveHistory(int collector){
 		Map<Integer, Integer> collectorHistory =  giveHistoryLi.get(collector);
-			for(Integer neighbor : AppConfig.myServentInfo.getNeighbors()){
-				collectorHistory.put(neighbor, 0);
-			}
+		for(Integer neighbor : AppConfig.myServentInfo.getNeighbors()){
+			collectorHistory.put(neighbor, 0);
+		}
 	}
 
 	private void resetGetHistory(int collector){
@@ -203,12 +203,4 @@ public class LaiYangBitcakeManager implements BitcakeManager {
 	public ChildrenInfoCollector getChildrenInfoCollector() {
 		return childrenInfoCollector;
 	}
-
-	//	public void recordGiveTransaction(int neighbor, int amount) {
-//		giveHistory.compute(neighbor, new MapValueUpdater(amount));
-//	}
-//
-//	public void recordGetTransaction(int neighbor, int amount) {
-//		getHistory.compute(neighbor, new MapValueUpdater(amount));
-//	}
 }

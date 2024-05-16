@@ -126,6 +126,7 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
                 AppConfig.timestampedStandardPrint("Unrelated children: " + unrelatedChildren);
                 AppConfig.timestampedStandardPrint("Other regions: " + otherRegion);
                 AppConfig.timestampedStandardPrint("Region size: " + wholeSubtree.size());
+                AppConfig.timestampedStandardPrint("My region: " + wholeSubtree);
 
                 // 2 wait for responses in our region to finish
                 boolean waitingResults = true;
@@ -186,7 +187,6 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
             for(Integer neighbour : entry.getValue().getGiveHistory().keySet())
                 entry.getValue().getGiveHistory().put(neighbour, 0);
         }
-        collectedLYValues = new ConcurrentHashMap<>();
         relatedChildren.clear();
         unrelatedChildren.clear();
 
@@ -225,13 +225,13 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
                 }
             }
 
-            synchronized (fromOtherTransitLock){
-                for(Map.Entry<String, Integer> otherTransit : fromOtherTransit.entrySet()) {
-                    // add value to our transit
-                    int oldValue = AppConfig.transit.getOrDefault(otherTransit.getKey(), 0);
-                    AppConfig.transit.put(otherTransit.getKey(), oldValue + otherTransit.getValue());
-                }
-            }
+//            synchronized (fromOtherTransitLock){
+//                for(Map.Entry<String, Integer> otherTransit : fromOtherTransit.entrySet()) {
+//                    // add value to our transit
+//                    int oldValue = AppConfig.transit.getOrDefault(otherTransit.getKey(), 0);
+//                    AppConfig.transit.put(otherTransit.getKey(), oldValue + otherTransit.getValue());
+//                }
+//            }
 
 
             // 3. Check if we are done
@@ -258,12 +258,16 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
                     AppConfig.myServentInfo, AppConfig.getInfoById(region), AppConfig.snapshotVersions, collectedLYValues, AppConfig.transit);
             MessageUtil.sendMessage(noInfoMessage);
         }
-
     }
 
     private void calculatingSnapshot(){
 		// print
         int sum = 0;
+        AppConfig.timestampedStandardPrint("Current transit: ");
+        for(Map.Entry<String, Integer> entry : AppConfig.transit.entrySet()) {
+            if(entry.getValue() != 0)
+                AppConfig.timestampedStandardPrint(entry.getKey() + " -> " + entry.getValue());
+        }
         for (Map.Entry<Integer, LYSnapshotResult> nodeResult : collectedLYValues.entrySet()) {
             sum += nodeResult.getValue().getRecordedAmount();
             AppConfig.timestampedStandardPrint(
@@ -284,12 +288,12 @@ public class ChildrenInfoCollector implements Runnable, Cancellable {
                         // get
                         int jiAmount = collectedLYValues.get(j).getGetHistory().get(i);
 
-//                        if(ijAmount != 0 || jiAmount != 0){
-//                            AppConfig.timestampedStandardPrint("---------------");
-//                            AppConfig.timestampedStandardPrint("Servent " + i + " gave " + ijAmount + " bitcakes to " + j);
-//                            AppConfig.timestampedStandardPrint("Servent " + j + " got  " + jiAmount + " bitcakes from " + i);
-//
-//                        }
+                        if(ijAmount != 0 || jiAmount != 0){
+                            AppConfig.timestampedStandardPrint("---------------");
+                            AppConfig.timestampedStandardPrint("Servent " + i + " gave " + ijAmount + " bitcakes to " + j);
+                            AppConfig.timestampedStandardPrint("Servent " + j + " got  " + jiAmount + " bitcakes from " + i);
+
+                        }
 
                         String transitKey= i + "-" + j;
                         int transitAmount = 0;
